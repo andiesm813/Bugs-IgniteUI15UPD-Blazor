@@ -1,0 +1,106 @@
+@page "/testing-components"
+@inject Financial.IFinancialService financialService
+
+<div class="row-layout testing-components-container">
+    <div class="column-layout group">
+        <div class="row-layout group_1">
+            <IgbButton class="button" testing-components-scope>
+                TEXT
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbButton Variant="ButtonVariant.Outlined" class="button" testing-components-scope>
+                TEXT
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbButton Variant="ButtonVariant.Flat" class="button" testing-components-scope>
+                TEXT
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+        <div class="row-layout group_1">
+            <IgbButton class="button" testing-components-scope>
+                Button Text
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbButton Variant="ButtonVariant.Outlined" class="button" testing-components-scope>
+                <span class="material-icons">
+                    add
+                </span>
+                <span>Button Text</span>
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbButton Variant="ButtonVariant.Flat" class="button" testing-components-scope>
+                Button Text
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+        <div class="row-layout group_1">
+            <IgbDatePicker Label="Date" class="date-picker" testing-components-scope></IgbDatePicker>
+            <IgbDatePicker Label="Date" Value="date" class="date-picker" testing-components-scope></IgbDatePicker>
+            <IgbDatePicker Label="Date" IsDisabled="true" class="date-picker" testing-components-scope></IgbDatePicker>
+        </div>
+        <IgbTabs class="tabs" testing-components-scope>
+            <IgbTab Selected="true">
+                <span class="material-icons">info</span>
+                Label
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content" testing-components-scope>
+                @foreach (var item in financialBoxOfficeRevenue)
+                {
+                    <IgbCard Outlined="true" class="card" testing-components-scope>
+                        <IgbCardMedia class="media-content" testing-components-scope>
+                            <img src="assets/SketchParser.png" class="image" />
+                        </IgbCardMedia>
+                        <IgbCardHeader>
+                            <h3 slot="title">
+                                Card Title
+                            </h3>
+                            <h5 slot="subtitle">
+                                Card Subtitle
+                            </h5>
+                        </IgbCardHeader>
+                        <IgbCardActions class="actions-content" testing-components-scope>
+                            <IgbButton class="button_1" testing-components-scope>
+                                Button
+                                <IgbRipple></IgbRipple>
+                            </IgbButton>
+                            <IgbIconButton Variant="IconButtonVariant.Flat">
+                                <span class="material-icons">
+                                    favorite
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                            <IgbIconButton Variant="IconButtonVariant.Flat">
+                                <span class="material-icons">
+                                    bookmark
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                            <IgbIconButton Variant="IconButtonVariant.Flat">
+                                <span class="material-icons">
+                                    share
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                        </IgbCardActions>
+                    </IgbCard>
+                }
+            </IgbTabPanel>
+            <IgbTab>
+                <span class="material-icons">info</span>
+                Label
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content_1" testing-components-scope></IgbTabPanel>
+        </IgbTabs>
+    </div>
+</div>
+
+@code {
+    private DateTime date = DateTime.Parse("2023-03-16T00:00");
+    private List<Financial.BoxOfficeRevenueType> financialBoxOfficeRevenue = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        financialBoxOfficeRevenue = await financialService.GetBoxOfficeRevenue();
+    }
+}

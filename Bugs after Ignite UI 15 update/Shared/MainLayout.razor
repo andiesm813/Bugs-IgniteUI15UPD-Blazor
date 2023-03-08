@@ -1,5 +1,78 @@
 @inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
-<div class="master-view-container">
-    @Body
+<div class="column-layout master-view-container">
+    <IgbNavbar class="navbar" master-view-scope>
+        <h6>Screen Title</h6>
+        <div slot="start">
+            <IgbIconButton Variant="IconButtonVariant.Flat" @onclick="@(e => _navDrawer!.ToggleAsync())">
+                <span class="material-icons">
+                    menu
+                </span>
+                <IgbRipple></IgbRipple>
+            </IgbIconButton>
+        </div>
+        <div slot="end">
+            <IgbIconButton Variant="IconButtonVariant.Flat">
+                <span class="material-icons">
+                    search
+                </span>
+                <IgbRipple></IgbRipple>
+            </IgbIconButton>
+            <IgbIconButton Variant="IconButtonVariant.Flat">
+                <span class="material-icons">
+                    favorite
+                </span>
+                <IgbRipple></IgbRipple>
+            </IgbIconButton>
+            <IgbIconButton Variant="IconButtonVariant.Flat">
+                <span class="material-icons">
+                    more_vert
+                </span>
+                <IgbRipple></IgbRipple>
+            </IgbIconButton>
+        </div>
+    </IgbNavbar>
+    <div class="row-layout group">
+        <div class="view-container">
+            @Body
+        </div>
+        <IgbNavDrawer Open="true" Position="NavDrawerPosition.End" @ref="_navDrawer" class="nav-drawer" master-view-scope>
+            <IgbNavDrawerItem @onclick="@(e => Navigate(""))">
+                <span slot="icon">
+                    <span class="material-icons icon">
+                        bug_report
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </span>
+                <div slot="content">Movie App</div>
+            </IgbNavDrawerItem>
+            <IgbNavDrawerItem @onclick="@(e => Navigate("testing-components"))">
+                <span slot="icon">
+                    <span class="material-icons icon">
+                        bug_report
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </span>
+                <div slot="content">Testing Components</div>
+            </IgbNavDrawerItem>
+            <IgbNavDrawerItem @onclick="@(e => Navigate("img-resizing"))">
+                <span slot="icon">
+                    <span class="material-icons icon">
+                        bug_report
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </span>
+                <div slot="content">Image Resizing</div>
+            </IgbNavDrawerItem>
+        </IgbNavDrawer>
+    </div>
 </div>
+
+@code {
+    private IgbNavDrawer? _navDrawer;
+    private void Navigate(string path)
+    {
+        NavigationManager.NavigateTo(path);
+    }
+}
