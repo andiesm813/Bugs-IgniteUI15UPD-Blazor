@@ -1,10 +1,10 @@
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
-using Bugs_after_Ignite_UI_15_update.Pages;
+using Bugs_after_Ignite_UI_15_update.Shared;
 
 namespace TestBugs_after_Ignite_UI_15_update
 {
-	public class TestMasterView
+	public class TestMainLayout
 	{
 		[Fact]
 		public void ViewIsCreated()
@@ -12,9 +12,11 @@ namespace TestBugs_after_Ignite_UI_15_update
 			using var ctx = new TestContext();
 			ctx.JSInterop.Mode = JSRuntimeMode.Loose;
 			ctx.Services.AddIgniteUIBlazor(
-				typeof(IgbButtonModule),
-				typeof(IgbRippleModule));
-			var componentUnderTest = ctx.RenderComponent<MasterView>();
+				typeof(IgbNavbarModule),
+				typeof(IgbIconButtonModule),
+				typeof(IgbRippleModule),
+				typeof(IgbNavDrawerModule));
+			var componentUnderTest = ctx.RenderComponent<MainLayout>();
 			Assert.NotNull(componentUnderTest);
 		}
 	}
