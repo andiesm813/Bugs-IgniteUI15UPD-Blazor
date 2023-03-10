@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Update="Shared/MainLayout.razor.css" CssScope="master-view-scope" />
+    <None Update="Pages/MovieAppRebuilt.razor.css" CssScope="movie-app-rebuilt-scope" />
     <None Update="Pages/MovieApp.razor.css" CssScope="movie-app-scope" />
     <None Update="Pages/TestingComponents.razor.css" CssScope="testing-components-scope" />
     <None Update="Pages/ImgResizing.razor.css" CssScope="img-resizing-scope" />

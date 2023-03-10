@@ -1,5 +1,7 @@
 @page "/"
-@inject MovieAppData.IMovieAppDataService movieAppDataService
+@using MovieAppData
+@using MovieAppData1
+@inject IMovieAppData1Service movieAppData1Service
 
 <div class="row-layout movie-app-container">
     <div class="column-layout group">
@@ -24,7 +26,7 @@
                 Now Playing
             </IgbTab>
             <IgbTabPanel class="row-layout tab-item-content" movie-app-scope>
-                @foreach (var item in movieAppDataNowPlaying)
+                @foreach (var item in movieAppData1NowPlaying)
                 {
                     <IgbCard class="card" movie-app-scope>
                         <IgbCardMedia class="media-content" movie-app-scope>
@@ -113,7 +115,7 @@
                 THEATRES NEAR YOU
             </p>
             <IgbList class="list" movie-app-scope>
-                @foreach (var item in movieAppDataTheatresNearYou)
+                @foreach (var item in movieAppData1TheatresNearYou)
                 {
                     <IgbListItem>
                         <div slot="start">
@@ -133,12 +135,12 @@
 </div>
 
 @code {
-    private List<MovieAppData.NowPlayingType> movieAppDataNowPlaying = new();
-    private List<MovieAppData.TheatresNearYouType> movieAppDataTheatresNearYou = new();
+    private List<NowPlayingType> movieAppData1NowPlaying = new();
+    private List<TheatresNearYouType> movieAppData1TheatresNearYou = new();
 
     protected override async Task OnInitializedAsync()
     {
-        movieAppDataNowPlaying = await movieAppDataService.GetNowPlaying();
-        movieAppDataTheatresNearYou = await movieAppDataService.GetTheatresNearYou();
+        movieAppData1NowPlaying = await movieAppData1Service.GetNowPlaying();
+        movieAppData1TheatresNearYou = await movieAppData1Service.GetTheatresNearYou();
     }
 }
