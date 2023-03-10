@@ -38,6 +38,15 @@
             @Body
         </div>
         <IgbNavDrawer Open="true" Position="NavDrawerPosition.End" @ref="_navDrawer" class="nav-drawer" master-view-scope>
+            <IgbNavDrawerItem @onclick="@(e => Navigate("movie-app-rebuilt"))">
+                <span slot="icon">
+                    <span class="material-icons icon">
+                        bug_report
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </span>
+                <div slot="content">Movie App Rebuilt</div>
+            </IgbNavDrawerItem>
             <IgbNavDrawerItem @onclick="@(e => Navigate(""))">
                 <span slot="icon">
                     <span class="material-icons icon">

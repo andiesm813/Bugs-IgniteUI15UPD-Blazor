@@ -1,0 +1,124 @@
+@page "/movie-app-rebuilt"
+@using MovieAppData
+@inject IMovieAppDataService movieAppDataService
+
+<div class="row-layout movie-app-rebuilt-container">
+    <div class="column-layout group">
+        <h5 class="content">
+            Movie Premieres
+        </h5>
+        <div class="row-layout group_1"></div>
+        <IgbTabs class="tabs" movie-app-rebuilt-scope>
+            <IgbTab Selected="true">
+                Now playing
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content" movie-app-rebuilt-scope>
+                @foreach (var item in movieAppDataNowPlaying)
+                {
+                    <IgbCard Outlined="true" class="card" movie-app-rebuilt-scope>
+                        <IgbCardMedia class="media-content" movie-app-rebuilt-scope>
+                            <img src="@item.MoviePoster" class="image" />
+                        </IgbCardMedia>
+                        <IgbCardHeader>
+                            <h3 slot="title">
+                                @item.Name
+                            </h3>
+                            <h5 slot="subtitle">
+                                @item.Genre
+                            </h5>
+                        </IgbCardHeader>
+                        <IgbCardContent class="body-content" movie-app-rebuilt-scope>
+                            <p class="typography__body-2 content">
+                                @item.Description
+                            </p>
+                        </IgbCardContent>
+                        <IgbCardActions class="actions-content" movie-app-rebuilt-scope>
+                            <IgbButton Variant="ButtonVariant.Flat" class="user-input" movie-app-rebuilt-scope>
+                                Button
+                                <IgbRipple></IgbRipple>
+                            </IgbButton>
+                            <IgbIconButton Variant="IconButtonVariant.Flat">
+                                <span class="material-icons">
+                                    favorite
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                            <IgbIconButton Variant="IconButtonVariant.Flat">
+                                <span class="material-icons">
+                                    bookmark
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                            <IgbIconButton Variant="IconButtonVariant.Flat">
+                                <span class="material-icons">
+                                    share
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                        </IgbCardActions>
+                    </IgbCard>
+                }
+            </IgbTabPanel>
+            <IgbTab Disabled="true">
+                Coming Soon
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content_1" movie-app-rebuilt-scope></IgbTabPanel>
+        </IgbTabs>
+    </div>
+    <div class="column-layout group_2">
+        <div class="column-layout group_3">
+            <p class="typography__subtitle-2 content">
+                BUY TICKETS
+            </p>
+            <span class="user-input">Select not yet available in Blazor</span>
+            <span class="user-input">Select not yet available in Blazor</span>
+            <IgbDatePicker Label="Date" class="date-picker" movie-app-rebuilt-scope></IgbDatePicker>
+            <span class="user-input">Select not yet available in Blazor</span>
+            <IgbButton class="user-input user-input_1" movie-app-rebuilt-scope>
+                Buy Tickets
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+        <div class="column-layout group_3">
+            <p class="typography__subtitle-2 content">
+                THEATRES NEAR YOU
+            </p>
+            <IgbList class="list" movie-app-rebuilt-scope>
+                <IgbListItem>
+                    <div slot="start">
+                        <IgbAvatar Initials="AB" Shape="AvatarShape.Circle" class="avatar avatar_1" movie-app-rebuilt-scope></IgbAvatar>
+                    </div>
+                    <div slot="title">Movie Theatre Name</div>
+                    <div slot="subtitle">Location</div>
+                </IgbListItem>
+                <IgbListItem>
+                    <div slot="start">
+                        <IgbAvatar Initials="AB" Shape="AvatarShape.Circle" class="avatar avatar_2" movie-app-rebuilt-scope></IgbAvatar>
+                    </div>
+                    <div slot="title">Movie Theatre Name</div>
+                    <div slot="subtitle">Location</div>
+                </IgbListItem>
+                <IgbListItem>
+                    <div slot="start">
+                        <IgbAvatar Initials="AB" Shape="AvatarShape.Circle" class="avatar avatar_3" movie-app-rebuilt-scope></IgbAvatar>
+                    </div>
+                    <div slot="title">Movie Theatre Name</div>
+                    <div slot="subtitle">Location</div>
+                </IgbListItem>
+            </IgbList>
+            <IgbButton class="user-input user-input_2" movie-app-rebuilt-scope>
+                CHANGE LOCATION
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<NowPlayingType> movieAppDataNowPlaying = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        movieAppDataNowPlaying = await movieAppDataService.GetNowPlaying();
+    }
+}

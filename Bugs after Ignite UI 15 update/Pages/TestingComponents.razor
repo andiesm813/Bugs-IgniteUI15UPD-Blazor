@@ -1,5 +1,8 @@
 @page "/testing-components"
-@inject Financial.IFinancialService financialService
+@using MovieAppData
+@using MovieAppData1
+@using Financial
+@inject IFinancialService financialService
 
 <div class="row-layout testing-components-container">
     <div class="column-layout group">
@@ -97,7 +100,7 @@
 
 @code {
     private DateTime date = DateTime.Parse("2023-03-16T00:00");
-    private List<Financial.BoxOfficeRevenueType> financialBoxOfficeRevenue = new();
+    private List<BoxOfficeRevenueType> financialBoxOfficeRevenue = new();
 
     protected override async Task OnInitializedAsync()
     {
